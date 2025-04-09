@@ -34,7 +34,7 @@ themes="$dir/themes"
 mkdir -p "$HOME/.icons"
 mkdir -p "$HOME/.themes"
 # extracting themes and icons
-parallel --bar "tar xzf {} -C ~/.icons/ --strip-components=1" ::: $icons/*.tar.gz
-parallel --bar "tar xzf {} -C ~/.themes/ --strip-components=1" ::: $themes/*.tar.gz
+parallel --bar "tar xzvf {} -C ~/.icons/ --strip-components=1" ::: $icons/*.tar.gz
+parallel --bar "tar xzvf {} -C ~/.themes/ --strip-components=1" ::: $themes/*.tar.gz
 
 #______________\\==//______________#
