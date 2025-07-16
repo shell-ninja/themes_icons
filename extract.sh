@@ -13,7 +13,7 @@ end="\e[1;0m"
 
 # check if parallel is installed
 if sudo pacman -Q parallel &> /dev/null || rpm -q parallel &> /dev/null || sudo zypper se -i parallel &> /dev/null; then
-    printf "${cyan}[ * ]${end} - parallel is installed already, proceesing to the next step..."
+    echo
 else
     if [[ -n "$(command -v pacman)" ]]; then
         sudo pacman -S parallel --noconfirm
