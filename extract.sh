@@ -33,8 +33,15 @@ themes="$dir/themes"
 
 mkdir -p "$HOME/.icons"
 mkdir -p "$HOME/.themes"
+
+
 # extracting themes and icons
-parallel --bar "tar xzf {} -C ~/.icons/ --strip-components=1" ::: $icons/*.tar.gz
-parallel --bar "tar xzf {} -C ~/.themes/ --strip-components=1" ::: $themes/*.tar.gz
+printf "${green}Extracting icons...${end}\n"
+parallel --bar 'top_dir=$(tar -tf {} | head -1 | sed -e "s@^\./@@" -e "s@/.*@@"); if [[ "$top_dir" == "icons" ]]; then tar xzf {} -C ~/.icons/ --strip-components=1; else tar xzf {} -C ~/.icons/; fi' ::: "$icons"/*.tar.gz
+
+echo 
+
+printf "${green}Extracting themes...${end}\n"
+parallel --bar 'top_dir=$(tar -tf {} | head -1 | sed -e "s@^\./@@" -e "s@/.*@@"); if [[ "$top_dir" == "themes" ]]; then tar xzf {} -C ~/.themes/ --strip-components=1; else tar xzf {} -C ~/.themes/; fi' ::: "$themes"/*.tar.gz
 
 #______________\\==//______________#
